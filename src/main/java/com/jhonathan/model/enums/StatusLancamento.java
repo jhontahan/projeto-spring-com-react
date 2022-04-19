@@ -1,4 +1,4 @@
-package com.jhonathan.model.entity;
+package com.jhonathan.model.enums;
 
 public enum StatusLancamento {
 

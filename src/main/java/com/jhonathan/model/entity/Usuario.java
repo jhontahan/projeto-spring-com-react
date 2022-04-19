@@ -1,5 +1,7 @@
 package com.jhonathan.model.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,8 +20,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Usuario {
+public class Usuario implements Serializable{
 	
+	private static final long serialVersionUID = 116436146121524114L;
+
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,12 +38,4 @@ public class Usuario {
 	@Column(name="senha")
 	private String senha;
 
-	public static void main(String[] args) {
-		Usuario u = new Usuario();
-		u.setEmail("teste");
-		u.setNome("j");
-		u.setSenha("dsdsd");
-	}
-	
-	
 }
