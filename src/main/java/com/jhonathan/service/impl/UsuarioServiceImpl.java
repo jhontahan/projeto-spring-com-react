@@ -53,7 +53,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 		
 		boolean existe = repository.existsByEmail(email);
 		if(existe) {
-			throw new RegraNegocioException("Já existe um usuário cadastrado come ste email.");
+			throw new RegraNegocioException("Já existe um usuário cadastrado come este email.");
 		}
 		
 		
