@@ -39,7 +39,7 @@ public class Lancamento {
 	private Long id;
 	
 	@Column(name = "descricao")
-	private String descriacao;
+	private String descricao;
 	
 	@Column(name = "mes")
 	private Integer mes;

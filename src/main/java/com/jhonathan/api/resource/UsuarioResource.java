@@ -1,9 +1,7 @@
-package com.jhonathan.api.recource;
+package com.jhonathan.api.resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,15 +13,21 @@ import com.jhonathan.exception.RegraNegocioException;
 import com.jhonathan.model.entity.Usuario;
 import com.jhonathan.service.UsuarioService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/api/usuarios")
-public class UsuarioRecource {
+@RequiredArgsConstructor
+public class UsuarioResource {
 
-	private UsuarioService usuarioService;
+	private final UsuarioService usuarioService;
 
-	public UsuarioRecource(UsuarioService usuarioService) {
-		this.usuarioService = usuarioService;
-	}
+	//Não se utiliza mais o construtor pois como a variável do service é final,
+	//obrigatoriamente o será criado um construtor com ela na anotação
+	//@RequiredArgsConstructor
+//	public UsuarioRecource(UsuarioService usuarioService) {
+//		this.usuarioService = usuarioService;
+//	}
 	
 	@PostMapping("/autenticar")
 	public ResponseEntity autenticar(@RequestBody UsuarioDTO dto) {

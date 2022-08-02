@@ -3,6 +3,7 @@ package com.jhonathan.service.impl;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -29,6 +30,7 @@ public class LancamentoServiceImpl implements LancamentoService{
 	@Transactional
 	public Lancamento salvar(Lancamento lancamento) {
 		validar(lancamento);
+		lancamento.setStatus(StatusLancamento.PENDENTE);
 		return repository.save(lancamento);
 	}
 
@@ -37,7 +39,6 @@ public class LancamentoServiceImpl implements LancamentoService{
 	public Lancamento atualizar(Lancamento lancamento) {
 		Objects.requireNonNull(lancamento.getId());
 		validar(lancamento);
-		lancamento.setStatus(StatusLancamento.PENDENTE);
 		return repository.save(lancamento);
 	}
 
@@ -65,7 +66,7 @@ public class LancamentoServiceImpl implements LancamentoService{
 	@Override
 	public void validar(Lancamento lancamento) {
 		
-		if (lancamento.getDescriacao() == null || lancamento.getDescriacao().trim().equals("")) {
+		if (lancamento.getDescricao() == null || lancamento.getDescricao().trim().equals("")) {
 			throw new RegraNegocioException("Informe uma descrição válida.");
 		}
 		
@@ -89,6 +90,11 @@ public class LancamentoServiceImpl implements LancamentoService{
 			throw new RegraNegocioException("Informe um tipo de lançamento.");
 		}
 		
+	}
+
+	@Override
+	public Optional<Lancamento> obterPorId(Long id) {
+		return repository.findById(id);
 	}
 
 }
