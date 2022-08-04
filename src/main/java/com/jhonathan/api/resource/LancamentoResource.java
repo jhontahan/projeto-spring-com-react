@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jhonathan.api.dto.AtualizarStatusDTO;
 import com.jhonathan.api.dto.LancamentoDTO;
 import com.jhonathan.exception.RegraNegocioException;
 import com.jhonathan.model.entity.Lancamento;
@@ -105,6 +106,28 @@ public class LancamentoResource {
 		}
 		
 	}
+	
+	@PutMapping("{id}/atualiza-status")
+	public ResponseEntity atualizarStatus(@PathVariable("id") Long id, @RequestBody AtualizarStatusDTO dto) {
+		return service.obterPorId(id).map(entity -> {
+			StatusLancamento statusSelecionado = StatusLancamento.valueOf(dto.getStatus());
+			
+			if (statusSelecionado == null) {
+				return ResponseEntity.badRequest().body("Não foi possível atualizar o status do lançamento");
+			}
+			
+			try {
+				entity.setStatus(statusSelecionado);
+				service.atualizar(entity);
+				return ResponseEntity.ok(entity);
+			}catch(RegraNegocioException e) {
+				return ResponseEntity.badRequest().body(e.getMessage());
+			}
+			
+			
+		}).orElseGet(() -> new ResponseEntity("Lançamento não encontrado na base de dados.", HttpStatus.BAD_REQUEST));
+	}
+	
 	
 	@PutMapping("{id}")
 	public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody LancamentoDTO dto) {
