@@ -45,6 +45,27 @@ public class LancamentoResource {
 	
 	//RequestParam é usado para receber parâmetros em uma busca. 
 	//Usa-se o requirid = false para que ese parâmetro não seja obrigatório.
+	
+	
+	//Exemplo de como usar via objeto JSON para realizar a consulta.
+//	@GetMapping
+//	public ResponseEntity buscar(@RequestBody LancamentoDTO dto) {
+//		
+//		Lancamento lancamentoFiltro = converter(dto);
+//		
+//		if (lancamentoFiltro.getUsuario() == null) {
+//			return ResponseEntity.badRequest().body("Não foi possível realizar a consulta. Usuário não encontrado para o id informado.");
+//		}
+//		else {
+//			lancamentoFiltro.setUsuario(usuario.get());
+//		}
+//		
+//		List<Lancamento> lancamentos = service.buscar(lancamentoFiltro);
+//		
+//		return ResponseEntity.ok(lancamentos);
+//		
+//	}
+	
 	@GetMapping
 	public ResponseEntity buscar(@RequestParam(value="descricao", required = false) String descricao,
 								 @RequestParam(value="mes", required = false) Integer mes,
