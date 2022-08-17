@@ -3,7 +3,6 @@ package com.jhonathan.api.resource;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import org.junit.platform.engine.reporting.ReportEntry;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
