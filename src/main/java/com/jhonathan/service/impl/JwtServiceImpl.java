@@ -39,6 +39,7 @@ public class JwtServiceImpl implements JwtService{
 							.setExpiration(data)
 							.setSubject(usuario.getEmail())
 							.claim("nome", usuario.getNome())
+							.claim("userId", usuario.getId())
 							.claim("horaExpiracao", horaExpiracaoToken)
 							.signWith(SignatureAlgorithm.HS512, chaveAssinatura)
 							.compact();
